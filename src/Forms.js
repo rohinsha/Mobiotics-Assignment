@@ -152,7 +152,7 @@ export default class Forms extends Component {
 
     return (
       <div className="container">
-        <div className="">
+        <div className="text-center">
           {this.state.isNext ? (
             ""
           ) : (
