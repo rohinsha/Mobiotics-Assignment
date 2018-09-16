@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import FirstForm from "./FirstForm";
 import SecondForm from "./SecondForm";
 import FormDataDisplay from "./FormDataDisplay";
-import PropTypes from 'prop-types';
-import "./App.css";
+import PropTypes from "prop-types";
+import "./Common-styles.css";
 
 export default class Forms extends Component {
   state = {
     personname: "",
     email: "",
     password: "",
-    dob: new Date(),
+    dob:"",
     phone: "",
     gender: "",
     isNext: false,
@@ -22,13 +22,18 @@ export default class Forms extends Component {
   validateFirstForm(personname, email, password) {
     const firstFormErrors = [];
     if (personname.length === 0) {
-      firstFormErrors.push("Name can't be empty");
+      console.log(personname);
+      firstFormErrors.push("Name field can't be empty");
+    
     } else if (!personname.match(/^[a-zA-Z\s]*$/)) {
-      firstFormErrors.push("Name should only contain letters");
+      firstFormErrors.push("Name should contain only letters");
+    
     } else if (email.length === 0) {
       firstFormErrors.push("Email field can't be left blank");
+     
     } else if (!email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       firstFormErrors.push("Enter valid email id");
+
     } else if (password.length === 0) {
       firstFormErrors.push("Password field can't be left blank");
     } else if (
@@ -37,7 +42,7 @@ export default class Forms extends Component {
       )
     ) {
       firstFormErrors.push(
-        " should have one Uppercase, one lowercase, one digit and atleast specail character"
+        "Password should have atleast one uppercase, one lowercase, one digit and one special character"
       );
     } else {
       return true;
@@ -48,27 +53,26 @@ export default class Forms extends Component {
   validateSecondForm(dob, phone, gender) {
     const secondFormErrors = [];
     if (dob.length === 0) {
-      secondFormErrors.push("Date of Birth field can't be left blank");
-    } else if (phone.length === 0) {
+       secondFormErrors.push("Date of Birth field can't be left blank");
+    }else if (phone.length === 0) {
       secondFormErrors.push("Phone number field can't be left blank");
     } else if (!phone.match(/^[0-9]*$/)) {
       secondFormErrors.push("Phone number should contain only digits");
     } else if (phone.length !== 10) {
       secondFormErrors.push("Phone number should be of 10 digits");
+    }else if (gender.length===0) {
+      secondFormErrors.push("Gender field can't be left blank");
     }
-
-    //  else if (gender.val()=="") {
-    //   errors.push("Password field can't be left blank");
-    // }
     else {
       return true;
     }
     return secondFormErrors;
   }
 
-  handleDob = date => {
+  handleDob=e=> {
+    const value=e.target.value;
     this.setState({
-      dob: date
+      dob:value
     });
   };
 
@@ -96,7 +100,6 @@ export default class Forms extends Component {
     const firstFormErrors = this.validateFirstForm(personname, email, password);
     if (firstFormErrors.length > 0) {
       this.setState({ firstFormErrors });
-      return;
     } else {
       this.setState({
         isNext: true
@@ -106,19 +109,24 @@ export default class Forms extends Component {
 
   secondFormHandler = e => {
     e.preventDefault();
-
     const { dob, phone, gender } = this.state;
-
     const secondFormErrors = this.validateSecondForm(dob, phone, gender);
     if (secondFormErrors.length > 0) {
       this.setState({ secondFormErrors });
       return;
-    } else {
+    }else {
+      var dobDate=dob.split("-");
+      dobDate= String(dobDate[2]+"-"+dobDate[1]+"-"+dobDate[0]);
       this.setState({
-        isSubmit: !this.state.isSubmit
+        isSubmit: !this.state.isSubmit,
+        dob:dobDate
       });
+     document.getElementById('title').style.display="none";
+     document.getElementById('root').style.cssText="background-image:none";
+     document.getElementsByClassName("main-wrapper")[0].setAttribute("style","width:40%;backgroundColor:red;color:white;border:20px solid white");
     }
-  };
+
+  }
 
   render() {
     const {
@@ -151,34 +159,37 @@ export default class Forms extends Component {
     }
 
     return (
-      <div className="container">
-        <div className="text-center">
-          {this.state.isNext ? (
-            ""
-          ) : (
-            <FirstForm
-              personname={personname}
-              email={email}
-              password={password}
-              handleUserInput={this.handleUserInput}
-              handleNextBtn={this.nextBtnHandler}
-              firstFormErrors={firstFormErrors}
-            />
-          )}
-        </div>
+      <div className="main-wrapper">
+        <div className="wrapper text-center">
+          <h2 className="title text-left" id="title">User Form</h2>
+          <div>
+            {this.state.isNext ? (
+              ""
+            ) : (
+              <FirstForm
+                personname={personname}
+                email={email}
+                password={password}
+                handleUserInput={this.handleUserInput}
+                handleNextBtn={this.nextBtnHandler}
+                firstFormErrors={firstFormErrors}
+              />
+            )}
+          </div>
 
-        <div>{this.state.isSubmit ? "" : secondForm}</div>
-        <div>
-          {this.state.isSubmit && (
-            <FormDataDisplay
-              personname={personname}
-              email={email}
-              password={password}
-              dob={dob}
-              phone={phone}
-              gender={gender}
-            />
-          )}
+          <div>{this.state.isSubmit ? "" : secondForm}</div>
+          <div>
+            {this.state.isSubmit && (
+              <FormDataDisplay
+                personname={personname}
+                email={email}
+                password={password}
+                dob={dob}
+                phone={phone}
+                gender={gender}
+              />
+            )}
+          </div>
         </div>
       </div>
     );
@@ -190,7 +201,7 @@ Forms.propTypes = {
   personname: PropTypes.string,
   email:PropTypes.string,
   password:PropTypes.string,
-  dob:PropTypes.date,
+  dob: PropTypes.number,
   mobile:PropTypes.number,
   gender:PropTypes.string
 };

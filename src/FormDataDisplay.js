@@ -2,10 +2,11 @@ import React, { Component } from "react";
 
 export default class FormDataDisplay extends Component {
   render() {
-    const { personname, email, Dob, phone, gender } = this.props;
+    const { personname, email, dob, phone, gender } = this.props;
+    console.log(dob);
     return (
       <div className="form-wrapper">
-        <h2>Form Details</h2>
+        <h2 className="userDetails">Form Details</h2>
         <div>
           <label>Name: </label>
           <span> {personname} </span>
@@ -16,11 +17,11 @@ export default class FormDataDisplay extends Component {
         </div>
         <div>
           <label>DOB: </label>
-          <span> {Dob} </span>
+          <span> {dob} </span>
         </div>
         <div>
           <label>Phone: </label>
-          <span>{phone} </span>
+          <span> {phone} </span>
         </div>
         <div>
           <label>Gender: </label>

@@ -1,0 +1,99 @@
+html,body{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.main-wrapper{
+  display: table;
+  height: 100%;
+  margin: 0 auto;
+
+}
+.wrapper{
+  display: table-cell;
+  vertical-align: middle;
+  width: 70%;
+  padding-bottom: 30px;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+form{
+  width: 100%;
+  color: white;
+  padding:20px 20px 20px 45px;
+  background-color: #272727;
+  font-size: 20px;
+  text-align: left;
+}
+
+label{
+  font-size: 23px;
+}
+input,select{
+  font-size: 18px !important;
+  padding-bottom: 8px !important;
+  margin-left: -13px !important;
+}
+
+.error-msg{
+  font-size: 15px;
+}
+
+.userDetails{
+  margin-bottom: 30px;
+}
+
+.form-wrapper{
+  font-size: 22px;
+  text-align: left;
+  padding-left: 50px
+}
+
+
+.button {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: red;
+  border: 2px solid white;
+  border-radius: 0.6em;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  margin: 10px 0 0 -12px !important;
+  padding: 0.8em 1.8em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.button:hover, .button:focus {
+  color: black;
+  outline: 0;
+}
+
+.custom-btn {
+  border-color: white;
+  color: black;
+  background-color: #a9a9a9 !important;
+  box-shadow: 0 0 40px 40px white inset, 0 0 0 0 white;
+  transition: all 150ms ease-in-out;
+}
+.custom-btn:hover {
+  box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+}
+
+.title{
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  margin-left: 45px;
+}
+
+.submit-btn{
+  margin-left: 20px !important;
+}
