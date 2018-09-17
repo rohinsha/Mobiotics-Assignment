@@ -3,43 +3,34 @@ import "./Common-styles.css";
 
 export default class SecondForm extends Component {
   render() {
-    const {
-      dob,
-      phone,
-      gender,
-      handleUserInput,
-      handleSubmitBtn,
-      handleBackBtn,
-      handleDob,
-      SecondFormErrors
-    } = this.props;
+    const {dob, phone, gender, handleUserInput, handleSubmitBtn, handleBackBtn, handleDob, SecondFormErrors } = this.props;
     return (
       <div className="">
-        <form onSubmit={handleSubmitBtn}>
+        <form onSubmit={handleSubmitBtn} className="custom-form">
           <div className="form-group">
-            <label>DOB</label>
+            <label className="label">DOB</label>
             <input value={dob} 
             name="date"
             type="date"
-            className="form-control"
+            className="form-control input"
             placeholder="Enter Dob"
             onChange={handleDob} />
         </div>
         <div className="form-group">
-          <label>Phone</label>
+          <label className="label">Phone</label>
           <input
             value={phone}
             name="phone"
             placeholder="Enter Phone number"
-            className="form-control"
+            className="form-control input"
             onChange={event => handleUserInput(event)}
           />
         </div>
         <div className="form-group">
-          <label>Gender</label>
+          <label className="label">Gender</label>
           <select
             value={gender}
-            className="form-control"
+            className="form-control input"
             name="gender"
             onChange={event => handleUserInput(event)}
             

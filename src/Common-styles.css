@@ -1,14 +1,20 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 html,body{
   height: 100%;
   margin: 0;
   padding: 0;
 }
+
 .main-wrapper{
   display: table;
   height: 100%;
   margin: 0 auto;
-
 }
+
 .wrapper{
   display: table-cell;
   vertical-align: middle;
@@ -16,11 +22,7 @@ html,body{
   padding-bottom: 30px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-form{
+.custom-form{
   width: 100%;
   color: white;
   padding:20px 20px 20px 45px;
@@ -29,10 +31,11 @@ form{
   text-align: left;
 }
 
-label{
+.label{
   font-size: 23px;
 }
-input,select{
+
+.input{
   font-size: 18px !important;
   padding-bottom: 8px !important;
   margin-left: -13px !important;
@@ -51,7 +54,6 @@ input,select{
   text-align: left;
   padding-left: 50px
 }
-
 
 .button {
   box-sizing: border-box;
@@ -72,7 +74,8 @@ input,select{
   font-weight: 700;
 }
 
-.button:hover, .button:focus {
+.button:hover,
+.button:focus {
   color: black;
   outline: 0;
 }
@@ -82,10 +85,14 @@ input,select{
   color: black;
   background-color: #a9a9a9 !important;
   box-shadow: 0 0 40px 40px white inset, 0 0 0 0 white;
+  -moz-box-shadow:0 0 40px 40px white inset, 0 0 0 0 white;
+  -webkit-box-shadow:0 0 40px 40px white inset, 0 0 0 0 white;
   transition: all 150ms ease-in-out;
 }
 .custom-btn:hover {
-  box-shadow: 0 0 10px 0 white inset, 0 0 10px 4px white;
+  box-shadow:0 0 10px 0 white inset, 0 0 10px 4px white;
+  -moz-box-shadow:0 0 10px 0 white inset, 0 0 10px 4px white;
+  -webkit-box-shadow:0 0 10px 0 white inset, 0 0 10px 4px white ;
 }
 
 .title{
@@ -97,4 +104,3 @@ input,select{
 .submit-btn{
   margin-left: 20px !important;
 }
-

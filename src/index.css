@@ -4,12 +4,10 @@ body {
   font-family: sans-serif;
   
 }
-
 #root{
 	height: 100%;
 	background-image: url(bg-image.jpg);
 	background-color: black;
     background-repeat: no-repeat;
     background-size: 100% 100%;
- 
 }

@@ -123,23 +123,13 @@ export default class Forms extends Component {
       });
      document.getElementById('title').style.display="none";
      document.getElementById('root').style.cssText="background-image:none";
-     document.getElementsByClassName("main-wrapper")[0].setAttribute("style","width:40%;backgroundColor:red;color:white;border:20px solid white");
+     document.getElementsByClassName("main-wrapper")[0].setAttribute("style","width:40%;color:white;border:20px solid white");
     }
 
   }
 
   render() {
-    const {
-      personname,
-      password,
-      firstFormErrors,
-      secondFormErrors,
-      dob,
-      phone,
-      gender,
-      email
-    } = this.state;
-
+    const { personname, password, firstFormErrors, secondFormErrors, dob, phone, gender, email } = this.state;
     var secondForm;
     if (this.state.isNext) {
       secondForm = (
