@@ -101,7 +101,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
   - [`npm run build` fails to minify](#npm-run-build-fails-to-minify)
   - [Moment.js locales are missing](#momentjs-locales-are-missing)
 - [Alternatives to Ejecting](#alternatives-to-ejecting)
-- [Something Missing?](#something-missing)
+- [Understanding the work flow of the Web App](#understanding-app-flow)
 
 ## Updating to New Releases
 
@@ -2479,9 +2479,88 @@ In the future, we might start automatically compiling incompatible third-party m
 
 ## Alternatives to Ejecting
 
-[Ejecting](#npm-run-eject) lets you customize anything, but from that point on you have to maintain the configuration and scripts yourself. This can be daunting if you have many similar projects. In such cases instead of ejecting we recommend to *fork* `react-scripts` and any other packages you need. [This article](https://auth0.com/blog/how-to-configure-create-react-app/) dives into how to do it in depth. You can find more discussion in [this issue](https://github.com/facebookincubator/create-react-app/issues/682).
+[Ejecting](#npm-run-eject) lets you customize anything, but from that point on you have to maintain the configuration and scripts yourself. This can be daunting if you have many similar projects. In such cases instead of ejecting we recommend to *fork* `react-
+scripts` and any other packages you need. [This article](https://auth0.com/blog/how-to-configure-create-react-app/) dives into how to do it in depth. You can find more discussion in [this issue](https://github.com/facebookincubator/create-react-app/issues/682).
 
-## Something Missing?
+## Understanding the work flow of the Web App
 
-If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/packages/react-scripts/template/README.md)
-"# Mobiotics-Assignment" 
+1. Forms.js file
+   import React, {Component} from react; 
+   We have to import react from react library, react is a **default import** and therefore we don't need to use curly braces to add it.
+   For importing Component package, we need to write it in curly braces as it is a **named import**.
+   Import all the files which are required including CSS and other JS files as components.
+   Components are reusable chunks of code which has states and props as two primary factors through which it is easy to build an          efficient app.A state in React Component is its own local state, the state cannot be accessed and modified outside the component and    can only be used inside the component.Props are used to pass information from a parent to a child component, it follows a top to        down approach.Any manipulation of state in a component can be shared among different components with the help of props.
+   we have two ways of writing components.
+      1.  Using the functional components which are stateless(states not present) in nature and do not have any life cycle methods.
+          To access props in a functional component, we have use **{props.}**
+      2.  Using class components which are stateful(states present) and can have any life cycle methods.
+          To access props in a class based component, we have use **{this.props.}**
+   So Form Component is a class based components which is also a default import which needs to be exported as default.
+   All the states which in our case are the input fields, isNext, isSubmit and arrays for first and second forms we require are            initialized at first.
+
+   When we use fat arrow functions we don't need to bind that function with **this**, one of the features of ES6.Fetch all the input      values on onChange event of input field and set the state by setState method.And onChange of any input field the error displayed        should disappear therefore make the arrays of erros empty.
+   onSubmit event written on Form tag where button should be of type submit has a nextbtnHandler function to be handled when next          button is clicked.
+   Destructure the three states personname, email, password from this.states.
+   And pass these three as parameters to validateFirstForm function.Validate the values using regular expression and push the errors in    the array accordingly.If the array length is greater than 0 then set state of firstformErrors or if no error are detected while        validation then make isNext state as true that means next button should navigate to the next page.
+   Back button has an event handler named as handleBackBtn in which isNext state is set to false by the setState.The way we validated      the firstform which had personname, email and password as the states passed, similarly we will validate the secondform by calling      the validateSecondForm function and push errors in the secondFormErrors array.If the length of the secondFormErrors array is greater    than 0 then setState for secondFormErrors array else if no erros then submit button should navigate to the formdatadisplay page.To      display the date, we have changed the format from mm/dd/yy to dd/mm/yy.isSubmit state is set to !this.state.isSubmit by the setState    method.
+   In the render function we have destructured all the states required. If the isNext state is true and the isSubmit state is false        then only the SecondForm component should be rendered.
+        
+        <SecondForm
+          dob={dob}
+          phone={phone}
+          gender={gender}
+          handleUserInput={this.handleUserInput}
+          handleSubmitBtn={this.secondFormHandler}
+          handleBackBtn={this.handleBackBtn}
+          handleDob={this.handleDob}
+          SecondFormErrors={secondFormErrors}
+        />
+   The values passed and are written after the assignment operator are all the states of the Forms Component and which are passed as      props to the SecondForm Component.If isNext state is false then render the FirstForm.  
+        
+        <FirstForm
+          personname={personname}
+          email={email}
+          password={password}
+          handleUserInput={this.handleUserInput}
+          handleNextBtn={this.nextBtnHandler}
+          firstFormErrors={firstFormErrors}
+        />
+   The values passed and are written after the assignment operator are all the states of the Forms Component and which are passed as      props to the FirstForm Component.
+   If isSubmit state is true then render the FormDataDisplay Component.
+        
+        <FormDataDisplay
+          personname={personname}
+          email={email}
+          password={password}
+          dob={dob}
+          phone={phone}
+          gender={gender}
+        />
+
+   The values passed and are written after the assignment operator are all the states of the Forms Component and which are passed as      props to the FormDataDisplay Component.
+   
+        Forms.propTypes = {
+          personname: PropTypes.string,
+          email:PropTypes.string,
+          password:PropTypes.string,
+          dob: PropTypes.number,
+          mobile:PropTypes.number,
+          gender:PropTypes.string
+        };
+   We can do type checking of the props for a component and set it's type before only.When an invalid value is provided for a prop, a      warning will be shown in the JavaScript console.
+   
+2. FirstForm.js
+               
+           const { personname, email, password, handleUserInput, handleNextBtn, firstFormErrors} = this.props;
+   Destructure the props in this fashion so that we can use them to render our component in a desired manner.
+   We have three input fields which are name, email, password and one error h4 tag.
+   
+3. SecondForm.js
+               
+           const {dob, phone, gender, handleUserInput, handleSubmitBtn, handleBackBtn, handleDob, SecondFormErrors } = this.props;
+   We have three input fields which are Dob, phone number, gender select box and one error h4 tag.
+
+4. FormDataDisplay.js
+        
+        const { personname, email, dob, phone, gender } = this.prop
+   Only label and span tags are used to display the data of the props.
